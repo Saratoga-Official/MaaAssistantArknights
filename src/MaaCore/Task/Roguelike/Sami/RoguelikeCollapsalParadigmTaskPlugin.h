@@ -18,6 +18,8 @@ public:
     virtual ~RoguelikeCollapsalParadigmTaskPlugin() override = default;
     virtual bool verify(AsstMsg msg, const json::value& details) const override;
 
+    std::optional<json::value>
+        response_to_event(RoguelikeEvent event, const json::value& detail) override;
     static bool enabled(std::shared_ptr<RoguelikeConfig> config)
     {
         return config->get_theme() == RoguelikeTheme::Sami && config->get_check_clp_pds();
@@ -25,13 +27,13 @@ public:
 
 public:
     void set_double_check_clp_pds(bool value) { m_double_check_clp_pds = value; }
-    bool check_collapsal_paradigm_banner();
 
 protected:
     virtual bool _run() override;
 
     bool new_zone() const;
 
+    bool check_collapsal_paradigm_banner();
     bool check_collapsal_paradigm_panel();
 
     void toggle_collapsal_status_panel();
